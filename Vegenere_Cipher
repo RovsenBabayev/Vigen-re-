@@ -1,0 +1,55 @@
+public class Vegenere_Cipher {
+    public static void main(String[] args) {
+        String space = "", space1 = "";
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input a text: ");
+        String text = sc.nextLine();
+        System.out.print("Input a key_word: ");
+        String key = sc.nextLine();
+        StringBuffer s = new StringBuffer();
+        StringBuilder s1 = new StringBuilder();
+        char[] arr = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'j', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        if (text.length() == key.length() || text.length() < key.length()) {
+            for (int i = 0; i < text.length(); i++) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (text.charAt(i) == arr[j]) {
+                        space += j + "-";
+                    }
+                }
+            }
+            for (int i = 0; i < key.length(); i++) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (key.charAt(i) == arr[j]) {
+                        space1 += j + "-";
+                    }
+                }
+            }
+
+        } else {
+            for (int i = 0; i < text.length(); i++) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (text.charAt(i) == arr[j]) {
+                        space += j + "-";
+                    }
+                }
+            }
+            do {
+                s1.append(key);
+            } while (text.length() > s1.length());
+
+            for (int i = 0; i < s1.length(); i++) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (s1.charAt(i) == arr[j]) {
+                        space1 += j + "-";
+                    }
+                }
+            }
+        }
+        String[] parts = space.split("-");
+        String[] parts2 = space1.split("-");
+        for (int i = 0; i < text.length(); i++) {
+            int x = (Integer.parseInt(parts[i]) + Integer.parseInt(parts2[i])) % 25;
+            s.append(arr[x]);
+        }
+        System.out.println("Encrypted text: " + s);
+    }
